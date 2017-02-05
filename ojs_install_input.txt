@@ -4,7 +4,7 @@ None
 utf-8
 None
 None
-/home/ojs/files
+/home/vagrant/ojsfiles
 ojs
 ojs
 ojs
