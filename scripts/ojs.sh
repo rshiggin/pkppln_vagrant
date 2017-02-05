@@ -1,6 +1,5 @@
 echo "Installing OJS"
-cd ~
-cd ojswww
+cd /home/vagrant/ojswww
 
 # Clone the OJS repository
 git clone https://github.com/pkp/ojs .
@@ -8,12 +7,12 @@ git checkout ojs-stable-3_0_2
 git submodule update --init --recursive
 
 # Prepare OJS environment
-cp /vagrant/config.inc.php config.inc.php
+cp /vagrant/ojs_config.inc.php config.inc.php
 chmod o+w config.inc.php
-mkdir ~/ojsfiles
-chmod 777 ~/ojsfiles
-sudo chgrp -R www-data cache public ~/ojsfiles config.inc.php
-sudo chmod -R ug+w cache public ~/ojsfiles config.inc.php
+mkdir /home/vagrant/ojsfiles
+chmod 777 /home/vagrant/ojsfiles
+sudo chgrp -R www-data cache public /home/vagrant/ojsfiles config.inc.php
+sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
 
 # Install Composer dependencies
 cd lib/pkp

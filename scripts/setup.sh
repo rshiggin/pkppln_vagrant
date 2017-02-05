@@ -13,19 +13,18 @@ apt-get -y install php5-gd php5-dev php5-xsl php5-curl php5-cli php-pear
 pear install Archive_Tar
 service apache2 restart
 
-# For the PKP PLN staging server
+# Required by the PKP PLN staging server
 apt-get install -y clamav clamav-daemon
 
+# Install composer
 curl -Ss https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/composer
 
-mkdir /var/www/html/ojs
-chown vagrant:vagrant /var/www/html/ojs
+# Create directories for our applications
+sudo mkdir /var/www/html/ojs
+sudo chown vagrant:vagrant /var/www/html/ojs
 ln -s /var/www/html/ojs /home/vagrant/ojswww
 
-mkdir /var/www/html/pkppln
-chown vagrant:vagrant /var/www/html/pkppln
+sudo mkdir /var/www/html/pkppln
+sudo chown vagrant:vagrant /var/www/html/pkppln
 ln -s /var/www/html/pkppln /home/vagrant/pkppln
-
-su -c "sh /vagrant/scripts/ojs.sh" vagrant
-su -c "sh /vagrant/scripts/pkppln.sh" vagrant

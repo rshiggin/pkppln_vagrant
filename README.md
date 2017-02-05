@@ -13,7 +13,7 @@ Install the following prerequisites on your laptop or desktop:
 
 ## Setting up your virtual machine
 
-1. `git clone https://github.com/mjordan/pkppln_vagrant
+1. `git clone https://github.com/mjordan/pkppln_vagrant`
 2. `cd pkppln_vagrant`
 3. `vagrant up`
 
@@ -39,11 +39,6 @@ You won't normally need the following but just in case:
 
 MySQL credentials:
   - username: root
-  - password: ojs
-
-OJS database details:
-  - database: ojs
-  - user: ojs
   - password: ojs
 
 ## Thanks

@@ -1,9 +1,9 @@
 echo "Installing the PKP PLN staging server"
 
+# Create the PLN staging server database
 echo "CREATE DATABASE symfony DEFAULT CHARSET utf8" | mysql -uroot -pojs
 
-cd ~
-cd pkppln
+cd /home/vagrant/pkppln
 git clone https://github.com/ubermichael/pkppln-php.git .
 cp /vagrant/pkppln_parameters.yml.dist app/config/parameters.yml.dist
 /usr/bin/composer install
