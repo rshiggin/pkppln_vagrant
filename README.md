@@ -22,12 +22,14 @@ When all the scripts have finished running, your virtual machine is ready for us
 ## Accessing OJS
 
 Point your browser at http://localhost:8000/ojs
-* The administrator account has username: ojs password: ojs
+* administrator account username: ojs
+* password: ojs
 
 ## Accessing the PKP PLN staging server application
 
 Point your browser at http://localhost:8000/pkppln/web/app.php
-* The administrator account has username: admin@example.com password: admin
+* administrator account username: admin@example.com
+* password: admin
 
 ## Other details you might find useful
 
