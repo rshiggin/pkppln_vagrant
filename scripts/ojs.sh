@@ -10,6 +10,7 @@ git submodule update --init --recursive
 cp /vagrant/ojs_config.inc.php config.inc.php
 chmod o+w config.inc.php
 mkdir /home/vagrant/ojsfiles
+chown -R www-data:www-data /home/vagrant/ojsfiles
 chmod 777 /home/vagrant/ojsfiles
 sudo chgrp -R www-data cache public /home/vagrant/ojsfiles config.inc.php
 sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
@@ -33,3 +34,9 @@ cd plugins/generic
 git clone https://github.com/defstat/PKP-PLN.git 
 cd PKP-PLN
 /usr/bin/composer install
+
+# Load test data
+echo "Loading OJS test data"
+cp -ra /vagrant/ojsdata/ojsfiles/* /home/vagrant/ojsfiles
+cp -ra /vagrant/ojsdata/public/* /home/vagrant/ojswww/public
+mysql -uroot -pojs ojs < /vagrant/ojsdata/ojs.sql
