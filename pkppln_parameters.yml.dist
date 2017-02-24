@@ -66,3 +66,5 @@ parameters:
 
     # remove completed deposits, once LOCKSSOMatic reports 100% agreement.
     remove_complete_deposits: false
+
+    max_harvest_attempts: 5
