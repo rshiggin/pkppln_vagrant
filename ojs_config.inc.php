@@ -464,7 +464,7 @@ xslt_command = ""
 
 [lockss]
 
-pln_url = http://localhost:8000/pkppln/web/app.php
+pln_url = http://localhost/pkppln/web/app.php
 
 ;;;;;;;;;;;;;;;;;;
 ; Debug Settings ;
