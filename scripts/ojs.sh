@@ -32,10 +32,10 @@ php tools/install.php < /vagrant/ojs_install_input.txt
 
 # Install PKP PLN plugin
 cd plugins/generic
-git clone https://github.com/defstat/PKP-PLN.git 
-cd PKP-PLN
+git clone https://github.com/defstat/pln.git
 cd /home/vagrant/ojswww
 php tools/upgrade.php upgrade
+cd plugins/generic/pln
 /usr/bin/composer install
 
 # Load test data
