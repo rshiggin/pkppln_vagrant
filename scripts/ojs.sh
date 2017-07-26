@@ -10,8 +10,9 @@ git submodule update --init --recursive
 cp /vagrant/ojs_config.inc.php config.inc.php
 chmod o+w config.inc.php
 mkdir /home/vagrant/ojsfiles
+mkdir /home/vagrant/ojsfiles/scheduledTaskLogs
 chown -R www-data:www-data /home/vagrant/ojsfiles
-chmod 777 /home/vagrant/ojsfiles
+# chmod -R 777 /home/vagrant/ojsfiles
 sudo chgrp -R www-data cache public /home/vagrant/ojsfiles config.inc.php
 sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
 
@@ -33,6 +34,8 @@ php tools/install.php < /vagrant/ojs_install_input.txt
 cd plugins/generic
 git clone https://github.com/defstat/PKP-PLN.git 
 cd PKP-PLN
+cd /home/vagrant/ojswww
+php tools/upgrade.php upgrade
 /usr/bin/composer install
 
 # Load test data
