@@ -33,8 +33,6 @@ php tools/install.php < /vagrant/ojs_install_input.txt
 # Install PKP PLN plugin
 cd plugins/generic
 git clone https://github.com/defstat/pln.git
-cd /home/vagrant/ojswww
-php tools/upgrade.php upgrade
 cd plugins/generic/pln
 /usr/bin/composer install
 
@@ -43,3 +41,8 @@ echo "Loading OJS test data"
 cp -ra /vagrant/ojsdata/ojsfiles/* /home/vagrant/ojsfiles
 cp -ra /vagrant/ojsdata/public/* /home/vagrant/ojswww/public
 mysql -uroot -pojs ojs < /vagrant/ojsdata/ojs.sql
+
+# OJS Upgrade script
+echo "Executing OJS Upgrade script"
+cd /home/vagrant/ojswww
+php tools/upgrade.php upgrade
