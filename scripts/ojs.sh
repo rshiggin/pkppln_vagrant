@@ -1,24 +1,5 @@
-echo "Installing OJS"
-cd /home/vagrant/ojswww
-
-# Clone the OJS repository
-git clone https://github.com/pkp/ojs .
-git checkout ojs-stable-3_0_2
-git submodule update --init --recursive
-
-# Prepare OJS environment
-cp /vagrant/ojs_config.inc.php config.inc.php
-chmod o+w config.inc.php
-mkdir /home/vagrant/ojsfiles
-mkdir /home/vagrant/ojsfiles/scheduledTaskLogs
-chown -R www-data:www-data /home/vagrant/ojsfiles
-# chmod -R 777 /home/vagrant/ojsfiles
-sudo chgrp -R www-data cache public /home/vagrant/ojsfiles config.inc.php
-sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
-
-# Install Composer dependencies
-cd lib/pkp
-/usr/bin/composer update
+echo "Installing OJS 2.4.x"
+cd ~
 
 # Set up the OJS database
 echo "CREATE DATABASE ojs DEFAULT CHARSET utf8" | mysql -uroot -pojs
@@ -26,23 +7,28 @@ echo "CREATE USER 'ojs'@'localhost' IDENTIFIED BY 'ojs'" | mysql -uroot -pojs
 echo "GRANT ALL ON ojs.* TO 'ojs'@'localhost'" | mysql -uroot -pojs
 echo "FLUSH PRIVILEGES" | mysql -uroot -pojs
 
+cd /var/www/html
+
+# Clone the OJS repository
+git clone https://github.com/pkp/ojs
+cd ojs
+git checkout ojs-stable-2_4_8
+cp config.TEMPLATE.inc.php config.inc.php
+mkdir ~/files
+chgrp -R www-data cache public ~/files config.inc.php
+chmod -R ug+w cache public ~/files config.inc.php
+
+# Install Composer dependencies
+cd lib/pkp
+curl -sS https://getcomposer.org/installer | php
+php composer.phar update
+
 # Install OJS
-cd /home/vagrant/ojswww
-php tools/install.php < /vagrant/ojs_install_input.txt
+wget -O - --post-data="adminUsername=admin&adminPassword=admin&adminPassword2=admin&adminEmail=ojs@mailinator.com&locale=en_US&additionalLocales[]=en_US&clientCharset=utf-8&connectionCharset=utf8&databaseCharset=utf8&filesDir=%2fhome%2fojs%2ffiles&encryption=sha1&databaseDriver=mysql&databaseHost=localhost&databaseUsername=ojs&databasePassword=ojs&databaseName=ojs&oaiRepositoryId=ojs2.localhost" "http://localhost/index.php/index/install/install"
 
-# Install PKP PLN plugin
-cd plugins/generic
-git clone https://github.com/defstat/pln.git
-cd plugins/generic/pln
-/usr/bin/composer install
+mysql -uroot -pojs ojs < /vagrant/ojsdata/ojs2.sql
 
-# Load test data
-echo "Loading OJS test data"
-cp -ra /vagrant/ojsdata/ojsfiles/* /home/vagrant/ojsfiles
-cp -ra /vagrant/ojsdata/public/* /home/vagrant/ojswww/public
-mysql -uroot -pojs ojs < /vagrant/ojsdata/ojs.sql
+# Import 
+cd /var/www/html/ojs/tools
 
-# OJS Upgrade script
-echo "Executing OJS Upgrade script"
-cd /home/vagrant/ojswww
-php tools/upgrade.php upgrade
+php importExport.php NativeImportExportPlugin import /vagrant/ojsdata/test.xml journaloftesting admin
