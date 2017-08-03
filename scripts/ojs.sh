@@ -2,8 +2,7 @@ echo "Installing OJS"
 cd /home/vagrant/ojswww
 
 # Clone the OJS repository
-git clone https://github.com/pkp/ojs .
-git checkout ojs-stable-3_0_2
+git clone -b ojs-stable-3_0_2 https://github.com/pkp/ojs .
 git submodule update --init --recursive
 
 # Prepare OJS environment
