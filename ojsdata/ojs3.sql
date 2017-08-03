@@ -1,0 +1,1 @@
+select issue_id from issues;
