@@ -1,3 +1,4 @@
+sudo -i
 echo "Installing OJS 2.4.x"
 cd ~
 
@@ -10,9 +11,13 @@ echo "FLUSH PRIVILEGES" | mysql -uroot -pojs
 cd /var/www/html
 
 # Clone the OJS repository
-git clone -b ojs-stable-2_4_8 --single-branch https://github.com/pkp/ojs
-cd ojs
-git submodule update --init --recursive
+ git clone -b ojs-stable-2_4_8 --single-branch https://github.com/pkp/ojs
+ cd ojs
+ git submodule update --init --recursive
+
+# mkdir ojs
+# cp -ra /vagrant/ojsdata/ojsfiles/ojs2/* /ojs
+
 cp /vagrant/ojsdata/config_OJS2.inc.php config.inc.php
 mkdir ~/files
 chgrp -R www-data cache public ~/files config.inc.php
@@ -36,8 +41,6 @@ mysql -uroot -pojs ojs < /vagrant/ojsdata/installationPhase248DataImport.sql
 
 # Import 
 cd /var/www/html/ojs/tools
-# php upgrade.php upgrade
-# php importExport.php NativeImportExportPlugin export test2.xml journaloftesting issues
 php importExport.php NativeImportExportPlugin import /vagrant/ojsdata/test.xml ojs admin
 
 # Installing OJS3
@@ -48,6 +51,10 @@ cd /var/www/html
 git clone -b ojs-stable-3_0_2 --single-branch https://github.com/pkp/ojs ojs3
 cd ojs3
 git submodule update --init --recursive
+
+# mkdir ojs3
+# cp -ra /vagrant/ojsdata/ojsfiles/ojs3/* /ojs3
+
 cp /vagrant/ojsdata/config_OJS3.inc.php config.inc.php
 mkdir ~/files3
 chgrp -R www-data cache public ~/files3 config.inc.php
@@ -62,5 +69,5 @@ php composer.phar update
 # Import 
 cd /var/www/html/ojs3/tools
 php upgrade.php upgrade
-php importExport.php NativeImportExportPlugin export test2.xml ojs issues
-# php importExport.php NativeImportExportPlugin import /vagrant/ojsdata/test.xml ojs admin
+mysql -N -uroot -pojs ojs -e "select GROUP_CONCAT(issue_id SEPARATOR ' ') from issues" >> /vagrant/ojsdata/exportScriptParameters.txt
+sh /vagrant/ojsdata/exportScriptParameters.txt
