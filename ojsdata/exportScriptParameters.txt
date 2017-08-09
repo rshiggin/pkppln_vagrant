@@ -1,1 +1,1 @@
-php importExport.php NativeImportExportPlugin export test2.xml ojs issues 1
+php importExport.php NativeImportExportPlugin export test2.xml ojs issues 
