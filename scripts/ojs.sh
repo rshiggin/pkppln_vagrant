@@ -70,4 +70,4 @@ php composer.phar update
 cd /var/www/html/ojs3/tools
 php upgrade.php upgrade
 mysql -N -uroot -pojs ojs -e "select GROUP_CONCAT(issue_id SEPARATOR ' ') from issues" >> /vagrant/ojsdata/exportScriptParameters.txt
-sh /vagrant/ojsdata/exportScriptParameters.txt
+/vagrant/ojsdata/exportScriptParameters.txt
