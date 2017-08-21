@@ -17,7 +17,7 @@ sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
 
 # Install Composer dependencies
 cd lib/pkp
-/usr/bin/composer update
+/usr/bin/composer -q update
 
 # Set up the OJS database
 echo "CREATE DATABASE ojs DEFAULT CHARSET utf8" | mysql -uroot -pojs
@@ -33,7 +33,7 @@ php tools/install.php < /vagrant/ojs_install_input.txt
 cd plugins/generic
 git clone https://github.com/defstat/pln.git
 cd pln
-/usr/bin/composer install
+/usr/bin/composer -q install
 
 # Load test data
 echo "Loading OJS test data"

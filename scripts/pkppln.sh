@@ -6,7 +6,7 @@ echo "CREATE DATABASE symfony DEFAULT CHARSET utf8" | mysql -uroot -pojs
 cd /home/vagrant/pkppln
 git clone https://github.com/ubermichael/pkppln-php.git .
 cp /vagrant/pkppln_parameters.yml.dist app/config/parameters.yml.dist
-/usr/bin/composer install
+/usr/bin/composer -q install
 
 # Prepare the staging server environment
 chmod -R 777 /var/www/html/pkppln/app/cache
