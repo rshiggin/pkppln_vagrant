@@ -11,6 +11,11 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password_again passwo
 tasksel install lamp-server
 apt-get -y install php5-gd php5-dev php5-xsl php5-curl php5-cli php-pear
 pear install Archive_Tar
+
+# We need to configure apache to listen on both ports 80 and 8000.
+cp /vagrant/apache_configs/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+cp /vagrant/apache_configs/ports.conf /etc/apache2/ports.conf
+
 service apache2 restart
 
 # Required by the PKP PLN staging server
