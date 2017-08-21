@@ -38,7 +38,9 @@ cd pln
 # Load test data
 echo "Loading OJS test data"
 cp -ra /vagrant/ojsdata/ojsfiles/* /home/vagrant/ojsfiles
+chown -R www-data:www-data /home/vagrant/ojsfiles
 cp -ra /vagrant/ojsdata/public/* /home/vagrant/ojswww/public
+chown -R www-data:www-data /home/vagrant/ojswww/public
 mysql -uroot -pojs ojs < /vagrant/ojsdata/ojs.sql
 
 # OJS Upgrade script
