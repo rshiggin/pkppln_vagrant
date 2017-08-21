@@ -29,7 +29,7 @@
 installed = Off
 
 ; The canonical URL to the OJS installation (excluding the trailing slash)
-base_url = "http://localhost:8000/ojs"
+base_url = "http://localhost:8000/ojs/index.php/journaloftesting"
 
 ; Session cookie name
 session_cookie_name = OJSSID

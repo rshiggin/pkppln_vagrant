@@ -12,7 +12,6 @@ chmod o+w config.inc.php
 mkdir /home/vagrant/ojsfiles
 mkdir /home/vagrant/ojsfiles/scheduledTaskLogs
 chown -R www-data:www-data /home/vagrant/ojsfiles
-# chmod -R 777 /home/vagrant/ojsfiles
 sudo chgrp -R www-data cache public /home/vagrant/ojsfiles config.inc.php
 sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
 
@@ -33,7 +32,7 @@ php tools/install.php < /vagrant/ojs_install_input.txt
 # Install PKP PLN plugin
 cd plugins/generic
 git clone https://github.com/defstat/pln.git
-cd plugins/generic/pln
+cd pln
 /usr/bin/composer install
 
 # Load test data

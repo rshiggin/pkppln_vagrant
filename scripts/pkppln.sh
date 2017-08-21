@@ -16,4 +16,4 @@ php app/console fos:user:create --super-admin admin@example.com admin Admin Exam
 
 mysql -uroot -pojs symfony < /vagrant/pkppln_db_terms_of_use.sql
 
-echo "Log into the PKP PLN staging server at http://localhost:8000/pkppln/web/app.php with admin@example.com / admin"
+echo "Installation complete. See the README for URLs and credentials."
