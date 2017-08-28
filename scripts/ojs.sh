@@ -12,8 +12,7 @@ chmod o+w config.inc.php
 mkdir /home/vagrant/ojsfiles
 mkdir /home/vagrant/ojsfiles/scheduledTaskLogs
 chown -R www-data:www-data /home/vagrant/ojsfiles
-sudo chgrp -R www-data cache public /home/vagrant/ojsfiles config.inc.php
-sudo chmod -R ug+w cache public /home/vagrant/ojsfiles config.inc.php
+sudo chown -R www-data cache public /home/vagrant/ojsfiles config.inc.php
 
 # Install Composer dependencies
 cd lib/pkp
